@@ -1,3 +1,9 @@
-# Fullstack Authentication Example with Next.js and NextAuth.js
+<h1> Raven </h1>
 
-This is the starter project for the fullstack tutorial with Next.js and Prisma. You can find the final version of this project in the [`final`](https://github.com/prisma/blogr-nextjs-prisma/tree/final) branch of this repo.
+Raven is a social plataform for people all around the world gather together and have a great time
+
+<h2> Features </h2>
+
+- Make your profile as pretty as possible with our high customizable system
+- Gather all your friends together in a *club*
+- Make public posts so everyone can see your light

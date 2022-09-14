@@ -9,20 +9,55 @@ generator client {
 }
 
 model Post {
-  id        String     @default(cuid()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  id                String        @default(cuid()) @id
+  text              String
+  likes             BigInt        @default(0)
+  published         Boolean       @default(false)
+  attachments       String[]
+  userProfile       UserProfile   @relation(fields: [userProfileId], references: [id], name: "postOwnerProfile")
+  userProfileId     String
+
+  // comments
+  parentPost        Post          @relation(fields: [parentPostId], references: [id], name: "postComment")
+  parentPostId      String        
+  comments          Post[]        @relation(name: "postComment")
+
+  // likedPosts
+  likedPostsFrom    UserProfile[] @relation(name: "likedPosts")      
+  @@map(name: "post")
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  name          String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  posts         Post[]
+  id            String          @default(cuid()) @id
+  email         String          @unique
+  password      String
+  createdAt     DateTime        @default(now()) @map(name: "created_at")
+  updatedAt     DateTime        @updatedAt @map(name: "updated_at")
+  userProfile   UserProfile?    @relation(fields: [userProfileId], references: [id], name: "userProfile")
+  userProfileId String?         @unique
+
+  // followers and following
+  followerFrom    UserProfile[]    @relation( name: "followers")
+  followingWho    UserProfile[]    @relation(name: "following")    
   @@map(name: "users")
+}
+
+model UserProfile {d
+  id            String        @default(cuid()) @id
+  owner         User?         @relation(name: "userProfile")
+  avatar        String?
+  name          String?
+  ownedPosts    Post[]        @relation(name: "postOwnerProfile")
+  gender        String?
+  birthDate     DateTime      @map(name: "birth_date")
+  city          String?
+  about         String?
+
+  // followers and following
+  followers     User[]        @relation("followers")
+  following     User[]        @relation("following")
+
+  // likedPosts
+  likedPosts    Post[]        @relation("likedPosts")
+  @@map(name: "user_profile")
 }

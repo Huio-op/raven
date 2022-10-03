@@ -10,7 +10,10 @@
 
 .loginCard {
     display: flex;
-    width: 30vw;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    width: 22vw;
     height: 70vh;
     min-height: 500px;
     margin-left: 300px;
@@ -21,6 +24,8 @@
 }
 
 .titleWrapper {
+    width: 30vw;
+    height: 60vh;
     color: white;
     animation: flicker 1.5s infinite alternate;
     -webkit-user-select: none;
@@ -29,9 +34,17 @@
     user-select: none;
 }
 
+.firstLoginCardPart {
+    margin-bottom: 80px;
+}
+
+.secondLoginCardPart {
+    
+}
+
 .ravenTitle {
     margin: 0;
-    font-size: 180px;
+    font-size: 150px;
     font-family: 'Righteous', cursive;
     font-weight: 300;
 }
@@ -45,7 +58,7 @@
 }
 
 .ravenToday {
-    margin-left: 350px;
+    margin-left: 20vw;
 }
 
 @keyframes flicker {
@@ -75,4 +88,16 @@
     55% {
         text-shadow: none;
     }
+}
+
+.ravenAlreadyHave {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.forgotPassword {
+    color: white;
+    font-family: Roboto;
 }

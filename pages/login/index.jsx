@@ -4,13 +4,13 @@ import styles from '../../styles/login.module.css'
 const Page = () => {
 
     return (
-        <div className={`${styles.loginPageWrapper}`}>
-            <div className={`${styles.loginTextWrapper}`}>
-                <span>
-                    JOIN RAVEN TODAY
-                </span>
-            </div>
-            <div className={`${styles.loginContainer}`}>
+        <div className={`${styles.loginWrapper}`}>
+            <span className={`${styles.titleWrapper}`}>
+                <h2 className={`${styles.ravenJoin}`}>JOIN</h2>
+                <h1 className={`${styles.ravenTitle}`}>RAVEN</h1>
+                <h2 className={`${styles.ravenToday}`}>TODAY</h2>
+            </span>
+            <div className={`${styles.loginCard}`}>
                 
             </div>
         </div>

@@ -1,0 +1,32 @@
+.firstLoginCardPart {
+    margin-bottom: 140px;
+}
+
+.ravenAlreadyHave {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.forgotPassword {
+    color: white;
+    font-family: Roboto;
+}
+
+.loginCard :global(.MuiButtonBase-root) {
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.loginCard :global(.MuiButtonBase-root:hover) {
+    border-color: #ab98ec;
+}
+
+
+.secondLoginCardPart {
+    
+}

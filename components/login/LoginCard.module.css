@@ -1,8 +1,4 @@
-.firstLoginCardPart {
-    margin-bottom: 140px;
-}
-
-.ravenAlreadyHave {
+.createAccountText, .loginText {
     font-size: 20px;
     letter-spacing: 0.5px;
     color: white;
@@ -11,22 +7,14 @@
 
 .forgotPassword {
     color: white;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;;
 }
 
-.loginCard :global(.MuiButtonBase-root) {
-    width: 100%;
-    margin-top: 20px;
-    color: white;
-    border-color: white;
-    border-radius: 15px;
+.createAccountButton {
+    margin-bottom: 60px !important;
 }
 
-.loginCard :global(.MuiButtonBase-root:hover) {
-    border-color: #ab98ec;
+.cardWrapper {
+
 }
 
-
-.secondLoginCardPart {
-    
-}

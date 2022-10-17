@@ -9,10 +9,27 @@
 }
 
 .signUpFormWrapper {
+    margin-top: 30px;
     width: 100%
 }
 
 .signUpFormWrapper :global(.MuiTextField-root) {
     width: 100%;
-    border-color: white;
+    margin-bottom: 30px;
+}
+
+.signUpFormWrapper :global(.MuiFormLabel-root), .signUpFormWrapper :global(.MuiInputBase-input) {
+    color: #fff;
+}
+
+.signUpFormWrapper :global(.MuiFormLabel-root.Mui-focused) {
+    color: #ab98ec !important
+}
+
+.signUpFormWrapper :global(.MuiOutlinedInput-notchedOutline) {
+    border-color: #fff !important;
+}
+
+.signUpFormWrapper :global(fieldset) {
+    border-color: #ab98ec !important;
 }

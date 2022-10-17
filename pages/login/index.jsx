@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import styles from './login.module.css';
-import LoginCard from '../../components/login/LoginCard'
+import WelcomeCard from '../../components/login/WelcomeCard'
 import SignupCard from '../../components/login/SignupCard'
+import LoginCard from "../../components/login/LoginCard";
 
 const Page = () => {
 
@@ -15,11 +16,15 @@ const Page = () => {
        switch (cardValue) {
            case 0:
                return (
-                   <LoginCard changeCardValue={changeCardValue}/>
+                   <WelcomeCard changeCardValue={changeCardValue}/>
                )
            case 1:
                return (
                    <SignupCard changeCardValue={changeCardValue}/>
+               )
+           case 2:
+               return (
+                   <LoginCard changeCardValue={changeCardValue}/>
                )
        }
     }

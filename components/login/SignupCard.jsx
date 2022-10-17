@@ -78,11 +78,11 @@ const SignupCard = ({changeCardValue}) => {
 }
 
 const SignUpSchema = Yup.object().shape({
-    name: Yup.string().required().default(''),
-    email: Yup.string().email('Email inválido').required().default(''),
-    password: Yup.string().required().default('').min(8, 'A senha deve conter pelo menos 8 caracteres'),
+    name: Yup.string().required('É necessário fornecer um nome').default(''),
+    email: Yup.string().email('Email inválido').required('É necessário fornecer um e-mail').default(''),
+    password: Yup.string().required('É necessário fornecer uma senha').default('').min(8, 'A senha deve conter pelo menos 8 caracteres'),
     passwordConfirmation: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .oneOf([Yup.ref('password'), null], 'As senhas precisam ser iguais')
 });
 
 export default SignupCard;

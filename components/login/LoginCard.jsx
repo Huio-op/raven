@@ -56,8 +56,8 @@ const LoginCard = ({changeCardValue}) => {
 }
 
 const SignUpSchema = Yup.object().shape({
-    email: Yup.string().email('Email inválido').required().default(''),
-    password: Yup.string().required().default('').min(8, 'A senha deve conter pelo menos 8 caracteres')
+    email: Yup.string().email('Email inválido').required('').default(''),
+    password: Yup.string().required('').default('')
 });
 
 export default LoginCard;

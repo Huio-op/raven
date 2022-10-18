@@ -1,0 +1,25 @@
+.createAccountText, .loginText {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.forgotPassword {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+}
+
+.forgotPassword:hover {
+    color: #ab98ec;
+}
+
+.createAccountButton {
+    margin-bottom: 60px !important;
+}
+
+.cardWrapper {
+
+}
+

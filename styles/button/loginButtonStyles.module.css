@@ -1,0 +1,11 @@
+.cardWrapper :global(.MuiButtonBase-root) {
+    width: 100%;
+    margin-top: 20px;
+    color: white;
+    border-color: white;
+    border-radius: 15px;
+}
+
+.cardWrapper :global(.MuiButtonBase-root:hover) {
+    border-color: #ab98ec;
+}

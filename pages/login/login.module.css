@@ -1,0 +1,77 @@
+.loginWrapper {
+    display: flex;
+    background-image: url(../../assets/img/login-wall.jpg);
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginCard {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    width: 22vw;
+    height: 70vh;
+    min-height: 500px;
+    margin-left: 300px;
+    backdrop-filter: blur(4px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.titleWrapper {
+    width: 30vw;
+    height: 60vh;
+    color: white;
+    animation: flicker 1.5s infinite alternate;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ravenTitle {
+    margin: 0;
+    font-size: 150px;
+    font-family: 'Righteous', cursive;
+    font-weight: 300;
+}
+
+.ravenJoin,
+.ravenToday {
+    margin: 0;
+    font-size: 80px;
+    font-family: 'Pacifico', cursive;
+    font-weight: 100;
+}
+
+.ravenToday {
+    margin-left: 20vw;
+}
+
+@keyframes flicker {
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+        text-shadow: 0 0 4px #fff,
+        0 0 11px #fff,
+        0 0 19px #fff,
+        0 0 40px rgb(85, 0, 255),
+        0 0 80px rgb(85, 0, 255),
+        0 0 90px rgb(85, 0, 255),
+        0 0 100px rgb(85, 0, 255),
+        0 0 150px rgb(85, 0, 255);
+    }
+    20%,
+    24%,
+    55% {
+        text-shadow: none;
+    }
+}

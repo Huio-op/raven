@@ -1,0 +1,13 @@
+.HomePageWrapper {
+    background: var(--dark-background-color);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    width: 100vw;
+}
+
+.ProfileMIniatureWrapper {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}

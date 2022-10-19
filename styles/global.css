@@ -1,3 +1,11 @@
+:root {
+    --white: #fff;
+    --dark-background-color: #15202b;
+    --dark-border: 1px solid var(--dark-border-color);
+    --dark-border-color: rgb(56, 68, 77);
+    --montserrat: 'Montserrat', sans-serif;
+}
+
 body {
     margin: 0;
     padding: 0;

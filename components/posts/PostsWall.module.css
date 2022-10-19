@@ -7,4 +7,5 @@
     font-family: var(--montserrat);
     margin-top: 25px;
     width: 45%;
+    min-width: 650px;
 }

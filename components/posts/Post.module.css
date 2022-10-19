@@ -1,0 +1,16 @@
+.PostWrapper {
+    color: var(--white);
+    font-family: var(--montserrat);
+}
+
+.PostHeader {
+    width: 100%;
+}
+
+.PostTextContent {
+    width: 100%;
+}
+
+.PostMediaContent {
+    width: 100%;
+}

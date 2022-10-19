@@ -1,7 +1,9 @@
 import {useEffect, useState} from "react";
 import styles from './ProfileMiniatureAvatar.module.css'
 import Image from "next/image";
-import placeholder from '../../assets/img/placeholder-profile-avatar.jpg';
+
+
+import PLACEHOLDER from '../../assets/img/placeholder-profile-avatar.jpg';
 
 const ProfileMiniatureAvatar = ({userId}) => {
 
@@ -13,7 +15,7 @@ const ProfileMiniatureAvatar = ({userId}) => {
 
     const fetchUserAvatar = () => {
         //TODO Implementar a busca por avatar quando for criado o cadastro
-        setAvatar(placeholder)
+        setAvatar(PLACEHOLDER)
     }
 
     return (

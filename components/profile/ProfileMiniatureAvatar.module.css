@@ -4,6 +4,7 @@
 
 .AvatarWrapper {
     height: 50px;
+    position: relative;
     width: 50px;
 }
 

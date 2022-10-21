@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import PLACEHOLDER from '../../assets/img/placeholder-profile-avatar.jpg';
 
-const ProfileMiniatureAvatar = ({userId}) => {
+const ProfileMiniatureAvatar = ({userId, fullAvatar = null}) => {
 
     const [avatar, setAvatar] = useState('');
 
@@ -15,7 +15,12 @@ const ProfileMiniatureAvatar = ({userId}) => {
 
     const fetchUserAvatar = () => {
         //TODO Implementar a busca por avatar quando for criado o cadastro
-        setAvatar(PLACEHOLDER)
+        if (!fullAvatar) {
+            setAvatar(PLACEHOLDER);
+        } else {
+            setAvatar(fullAvatar);
+        }
+
     }
 
     return (

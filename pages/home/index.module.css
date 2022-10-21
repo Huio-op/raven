@@ -1,13 +1,31 @@
 .HomePageWrapper {
     background: var(--dark-background-color);
     display: flex;
-    height: 100vh;
     justify-content: center;
     width: 100vw;
 }
 
 .ProfileMIniatureWrapper {
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 15px;
+}
+
+.CreatePostWrapper {
+    align-items: center;
+    background: linear-gradient(315deg, rgba(63,59,130,1) 0%, rgba(0,212,255,1) 100%);
+    border-radius: 100%;
+    bottom: 15px;
+    box-shadow: 3px 2px 5px rgb(56, 68, 77);
+    color: var(--white);
+    justify-content: center;
+    height: 75px;
+    position: fixed;
+    right: 15px;
+    width: 75px;
+    display: flex;
+}
+
+.CreatePostWrapper span {
+    font-size: 45px !important;
 }

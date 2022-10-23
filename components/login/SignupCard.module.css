@@ -1,5 +1,6 @@
 .cardWrapper {
-
+    max-height: inherit;
+    min-height: 510px;
 }
 
 .createAccountTitle {

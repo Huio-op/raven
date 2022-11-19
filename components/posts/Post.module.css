@@ -1,0 +1,37 @@
+.PostWrapper {
+    color: var(--white);
+    font-family: var(--montserrat);
+    padding: var(--lr-15px);
+    box-shadow: 0 2px 0 -1px var(--dark-border-color);;
+}
+
+.PostHeader {
+    align-items: center;
+    display: inline-flex;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.PostTextContent {
+    font-size: 22px;
+    padding: var(--tb-20px);
+    width: 100%;
+}
+
+.PostMediaContent {
+    width: 100%;
+}
+
+.PostFooter {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: var(--tb-10px);
+    width: 100%;
+}
+
+.borderBottom {
+    border-color: var(--dark-border-color);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+}

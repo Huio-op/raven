@@ -1,0 +1,15 @@
+.ProfileMiniatureAvatar {
+    cursor: pointer;
+}
+
+.AvatarWrapper {
+    height: 50px;
+    position: relative;
+    width: 50px;
+}
+
+.AvatarImg {
+    background: var(--white);
+    border-radius: 100%;
+    overflow: hidden;
+}

@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    const userInfo = false;
+    const userInfo = true;
     //TODO: CREATE LOGIN AUTHENTICATION
     if (router.pathname !== "/login" && !userInfo) {
      router.push("/login");

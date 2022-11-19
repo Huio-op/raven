@@ -12,15 +12,11 @@ const LoginCard = ({ changeCardValue }) => {
   const router = useRouter();
 
   const doUserLogin = async (values) => {
-    console.log('rerererere', values);
-
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     });
-
-    console.log('chefefefefef', await res.json());
 
     if (res.ok) {
       router.push('/home');

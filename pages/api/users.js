@@ -12,7 +12,6 @@ const handler = async (req, res) => {
     });
     return res.status(200).json(result);
   } else if (req.method === 'POST') {
-    console.log('requisisis', req.body);
     const { email, password, name } = req.body;
     const result = await prisma.user.create({
       data: {

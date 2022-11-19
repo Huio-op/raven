@@ -10,8 +10,6 @@ const handler = async (req, res) => {
       },
     });
 
-    console.log('rererererere', user, password);
-
     if (user && user.password === password) {
       res.status(200).json(user);
     } else {

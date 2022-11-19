@@ -1,4 +1,5 @@
 import prisma from '../../lib/prisma';
+import MD5 from "crypto-js/md5";
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
@@ -13,16 +14,20 @@ const handler = async (req, res) => {
     return res.status(200).json(result);
   } else if (req.method === 'POST') {
     const { email, password, name } = req.body;
-    const result = await prisma.user.create({
+
+    const md5Password = MD5(password).toString();
+
+    const userProfileResult = await prisma.userProfile.create({
       data: {
-        email,
-        password,
+        name: name,
       },
     });
 
-    await prisma.userProfile.create({
+    const result = await prisma.user.create({
       data: {
-        name: name,
+        email,
+        password: md5Password,
+        userProfileId: userProfileResult.id
       },
     });
 

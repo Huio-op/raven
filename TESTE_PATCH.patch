@@ -1,0 +1,414 @@
+Index: pages/api/users.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pages/api/users.js b/pages/api/users.js
+--- a/pages/api/users.js	(revision ad69f7dd15ee5c598d612885c5f3d71b69fcddb3)
++++ b/pages/api/users.js	(date 1668885587133)
+@@ -1,12 +1,36 @@
+-import {PrismaClient} from '@prisma/client';
+-
+-const prisma = new PrismaClient();
++import prisma from '../../lib/prisma';
+ 
+ const handler = async (req, res) => {
+-    if (req.method === 'GET') {
+-      const result = await prisma.user.findMany();
+-      return res.status(200).json(result);
+-    }
+-  };
++  if (req.method === 'GET') {
++    const { email, password } = req.body;
++
++    const result = await prisma.user.findUnique({
++      where: {
++        email,
++        password,
++      },
++    });
++    return res.status(200).json(result);
++  } else if (req.method === 'POST') {
++    console.log('requisisis', req.body);
++    const { email, password, name } = req.body;
++    const result = await prisma.user.create({
++      data: {
++        email,
++        password,
++      },
++    });
++
++    await prisma.userProfile.create({
++      data: {
++        name: name,
++      },
++    });
++
++    res.json(result);
++  }
++
++  res.end();
++};
+ 
+-export default handler;
+\ No newline at end of file
++export default handler;
+Index: prisma/schema.prisma
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/prisma/schema.prisma b/prisma/schema.prisma
+--- a/prisma/schema.prisma	(revision ad69f7dd15ee5c598d612885c5f3d71b69fcddb3)
++++ b/prisma/schema.prisma	(date 1668883290705)
+@@ -51,7 +51,7 @@
+   name       String?
+   ownedPosts Post[]   @relation(name: "postOwnerProfile")
+   gender     String?
+-  birthDate  DateTime @map(name: "birth_date")
++  birthDate  DateTime? @map(name: "birth_date")
+   city       String?
+   about      String?
+ 
+Index: components/login/SignupCard.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/components/login/SignupCard.jsx b/components/login/SignupCard.jsx
+--- a/components/login/SignupCard.jsx	(revision ad69f7dd15ee5c598d612885c5f3d71b69fcddb3)
++++ b/components/login/SignupCard.jsx	(date 1668885046523)
+@@ -3,86 +3,113 @@
+ import buttonStyle from '../../styles/button/loginButtonStyles.module.css';
+ 
+ import Button from '@mui/material/Button';
+-import {Field, Form, Formik} from "formik";
++import { Field, Form, Formik } from 'formik';
+ import * as Yup from 'yup';
+-import {TextField} from "@mui/material";
++import { TextField } from '@mui/material';
+ 
+-const SignupCard = ({changeCardValue}) => {
+-    return (
+-        <div className={`${styles.cardWrapper} ${buttonStyle.cardWrapper}`}>
+-            <span className={`${styles.createAccountTitle}`}>Crie sua conta</span>
+-            <div className={`${styles.signUpFormWrapper}`}>
+-                <Formik initialValues={SignUpSchema.default()}
+-                        validationSchema={SignUpSchema}
+-                        onSubmit={() => {
+-                            console.log('yesss');
+-                            changeCardValue(2);
+-                        }}>
+-                    {({values, handleChange, handleBlur, errors, touched}) => {
+-                        return (
+-                            <Form>
+-                                <Field
+-                                    name='name'
+-                                    as={TextField}
+-                                    label='Nome'
+-                                    value={values.name}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.name && Boolean(errors.name)}
+-                                    helperText={touched.name && errors.name}
+-                                />
+-                                <Field
+-                                    name='email'
+-                                    as={TextField}
+-                                    label='E-mail'
+-                                    value={values.email}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.email && Boolean(errors.email)}
+-                                    helperText={touched.email && errors.email}/>
+-                                <Field
+-                                    name='password'
+-                                    as={TextField}
+-                                    label='Senha'
+-                                    type='password'
+-                                    value={values.password}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.password && Boolean(errors.password)}
+-                                    helperText={touched.password && errors.password}
+-                                />
+-                                <Field
+-                                    name='passwordConfirmation'
+-                                    as={TextField}
+-                                    label='Confirmar senha'
+-                                    type='password'
+-                                    value={values.passwordConfirmation}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.passwordConfirmation && Boolean(errors.passwordConfirmation)}
+-                                    helperText={touched.passwordConfirmation && errors.passwordConfirmation}
+-                                />
+-                                <Button variant="outlined" type='submit'>
+-                                    Criar conta
+-                                </Button>
+-                            </Form>
+-                        );
+-                    }}
+-                </Formik>
+-            </div>
+-            <Button variant="outlined" onClick={() => changeCardValue(0)}>
+-                Voltar
+-            </Button>
+-        </div>
+-    )
+-}
++const SignupCard = ({ changeCardValue }) => {
++  const createUser = async (values) => {
++    const result = await fetch('/api/users', {
++      method: 'POST',
++      headers: { 'Content-Type': 'application/json' },
++      body: JSON.stringify(values),
++    });
++
++    if (result.ok) {
++      changeCardValue(2);
++    }
++  };
++
++  return (
++    <div className={`${styles.cardWrapper} ${buttonStyle.cardWrapper}`}>
++      <span className={`${styles.createAccountTitle}`}>Crie sua conta</span>
++      <div className={`${styles.signUpFormWrapper}`}>
++        <Formik
++          initialValues={SignUpSchema.default()}
++          validationSchema={SignUpSchema}
++          onSubmit={async (values) => {
++            await createUser(values);
++          }}
++        >
++          {({ values, handleChange, handleBlur, errors, touched }) => {
++            return (
++              <Form>
++                <Field
++                  name="name"
++                  as={TextField}
++                  label="Nome"
++                  value={values.name}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={touched.name && Boolean(errors.name)}
++                  helperText={touched.name && errors.name}
++                />
++                <Field
++                  name="email"
++                  as={TextField}
++                  label="E-mail"
++                  value={values.email}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={touched.email && Boolean(errors.email)}
++                  helperText={touched.email && errors.email}
++                />
++                <Field
++                  name="password"
++                  as={TextField}
++                  label="Senha"
++                  type="password"
++                  value={values.password}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={touched.password && Boolean(errors.password)}
++                  helperText={touched.password && errors.password}
++                />
++                <Field
++                  name="passwordConfirmation"
++                  as={TextField}
++                  label="Confirmar senha"
++                  type="password"
++                  value={values.passwordConfirmation}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={
++                    touched.passwordConfirmation &&
++                    Boolean(errors.passwordConfirmation)
++                  }
++                  helperText={
++                    touched.passwordConfirmation && errors.passwordConfirmation
++                  }
++                />
++                <Button variant="outlined" type="submit">
++                  Criar conta
++                </Button>
++              </Form>
++            );
++          }}
++        </Formik>
++      </div>
++      <Button variant="outlined" onClick={() => changeCardValue(0)}>
++        Voltar
++      </Button>
++    </div>
++  );
++};
+ 
+ const SignUpSchema = Yup.object().shape({
+-    name: Yup.string().required('É necessário fornecer um nome').default(''),
+-    email: Yup.string().email('Email inválido').required('É necessário fornecer um e-mail').default(''),
+-    password: Yup.string().required('É necessário fornecer uma senha').default('').min(8, 'A senha deve conter pelo menos 8 caracteres'),
+-    passwordConfirmation: Yup.string()
+-        .oneOf([Yup.ref('password'), null], 'As senhas precisam ser iguais')
++  name: Yup.string().required('É necessário fornecer um nome').default(''),
++  email: Yup.string()
++    .email('Email inválido')
++    .required('É necessário fornecer um e-mail')
++    .default(''),
++  password: Yup.string()
++    .required('É necessário fornecer uma senha')
++    .default('')
++    .min(8, 'A senha deve conter pelo menos 8 caracteres'),
++  passwordConfirmation: Yup.string().oneOf(
++    [Yup.ref('password'), null],
++    'As senhas precisam ser iguais',
++  ),
+ });
+ 
+-export default SignupCard;
+\ No newline at end of file
++export default SignupCard;
+Index: components/login/LoginCard.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/components/login/LoginCard.jsx b/components/login/LoginCard.jsx
+--- a/components/login/LoginCard.jsx	(revision ad69f7dd15ee5c598d612885c5f3d71b69fcddb3)
++++ b/components/login/LoginCard.jsx	(date 1668885864760)
+@@ -3,61 +3,80 @@
+ import buttonStyle from '../../styles/button/loginButtonStyles.module.css';
+ 
+ import Button from '@mui/material/Button';
+-import {Field, Form, Formik} from "formik";
++import { Field, Form, Formik } from 'formik';
+ import * as Yup from 'yup';
+-import {TextField} from "@mui/material";
++import { TextField } from '@mui/material';
+ 
+-const LoginCard = ({changeCardValue}) => {
+-    return (
+-        <div className={`${styles.cardWrapper} ${buttonStyle.cardWrapper}`}>
+-            <span className={`${styles.createAccountTitle}`}>Faça seu login</span>
+-            <div className={`${styles.signUpFormWrapper}`}>
+-                <Formik initialValues={SignUpSchema.default()}
+-                        validationSchema={SignUpSchema}
+-                        onSubmit={() => {
+-                            console.log('yesss');
+-                        }}>
+-                    {({values, handleChange, handleBlur, errors, touched}) => {
+-                        return (
+-                            <Form>
+-                                <Field
+-                                    name='email'
+-                                    as={TextField}
+-                                    label='E-mail'
+-                                    value={values.email}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.email && Boolean(errors.email)}
+-                                    helperText={touched.email && errors.email}/>
+-                                <Field
+-                                    name='password'
+-                                    as={TextField}
+-                                    label='Senha'
+-                                    type='password'
+-                                    value={values.password}
+-                                    onChange={handleChange}
+-                                    onBlur={handleBlur}
+-                                    error={touched.password && Boolean(errors.password)}
+-                                    helperText={touched.password && errors.password}
+-                                />
+-                                <Button variant="outlined" type='submit'>
+-                                    Login
+-                                </Button>
+-                            </Form>
+-                        );
+-                    }}
+-                </Formik>
+-            </div>
+-            <Button variant="outlined" onClick={() => changeCardValue(0)}>
+-                Voltar
+-            </Button>
+-        </div>
+-    )
+-}
++const LoginCard = ({ changeCardValue }) => {
++  const doUserLogin = async (values) => {
++    console.log('rerererere', values);
++
++    const res = await fetch('/api/login', {
++      method: 'POST',
++      headers: { 'Content-Type': 'application/json' },
++      body: JSON.stringify(values),
++    });
++
++    console.log('chefefefefef', await res.json());
++
++    if (res.ok) {
++      Router.push('/home');
++    }
++  };
++
++  return (
++    <div className={`${styles.cardWrapper} ${buttonStyle.cardWrapper}`}>
++      <span className={`${styles.createAccountTitle}`}>Faça seu login</span>
++      <div className={`${styles.signUpFormWrapper}`}>
++        <Formik
++          initialValues={SignUpSchema.default()}
++          validationSchema={SignUpSchema}
++          onSubmit={async (values) => {
++            await doUserLogin(values);
++          }}
++        >
++          {({ values, handleChange, handleBlur, errors, touched }) => {
++            return (
++              <Form>
++                <Field
++                  name="email"
++                  as={TextField}
++                  label="E-mail"
++                  value={values.email}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={touched.email && Boolean(errors.email)}
++                  helperText={touched.email && errors.email}
++                />
++                <Field
++                  name="password"
++                  as={TextField}
++                  label="Senha"
++                  type="password"
++                  value={values.password}
++                  onChange={handleChange}
++                  onBlur={handleBlur}
++                  error={touched.password && Boolean(errors.password)}
++                  helperText={touched.password && errors.password}
++                />
++                <Button variant="outlined" type="submit">
++                  Login
++                </Button>
++              </Form>
++            );
++          }}
++        </Formik>
++      </div>
++      <Button variant="outlined" onClick={() => changeCardValue(0)}>
++        Voltar
++      </Button>
++    </div>
++  );
++};
+ 
+ const SignUpSchema = Yup.object().shape({
+-    email: Yup.string().email('Email inválido').required('').default(''),
+-    password: Yup.string().required('').default('')
++  email: Yup.string().email('Email inválido').required('').default(''),
++  password: Yup.string().required('').default(''),
+ });
+ 
+-export default LoginCard;
+\ No newline at end of file
++export default LoginCard;

@@ -51,7 +51,7 @@ model UserProfile {
   name       String?
   ownedPosts Post[]   @relation(name: "postOwnerProfile")
   gender     String?
-  birthDate  DateTime @map(name: "birth_date")
+  birthDate  DateTime? @map(name: "birth_date")
   city       String?
   about      String?
 

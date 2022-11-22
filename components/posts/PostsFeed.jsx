@@ -6,8 +6,8 @@ import USER_AVATAR from '../../assets/img/placeholder-profile-avatar.jpg';
 const PostsFeed = () => {
   return (
     <div className={styles.PostsFeedBody}>
-      {POSTS.map((post) => {
-        return <Post fullPost={post} />;
+      {POSTS.map((post, idx) => {
+        return <Post fullPost={post} key={idx} />;
       })}
     </div>
   );

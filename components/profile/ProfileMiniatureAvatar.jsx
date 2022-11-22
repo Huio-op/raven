@@ -26,7 +26,7 @@ const ProfileMiniatureAvatar = ({userId, fullAvatar = null}) => {
     return (
         <div className={styles.ProfileMiniatureAvatar}>
             <div className={styles.AvatarWrapper}>
-                <Image className={styles.AvatarImg} src={avatar} alt={"Avatar"} layout={"fill"}/>
+                {/*<Image className={styles.AvatarImg} src={avatar} alt={"Avatar"} layout={"fill"}/>*/}
             </div>
         </div>
     )

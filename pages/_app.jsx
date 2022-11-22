@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useRouter} from 'next/router';
-import Head from 'next/head'
+import Head from 'next/head';
+import AppContext from '../AppContext';
 
 import {getCookies} from 'cookies-next'
 
@@ -11,6 +12,7 @@ const App = ({ Component, pageProps }) => {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [loggedUser, setLoggedUser] = useState([]);
 
   const isUserLoggedIn = () => {
       return getCookies('userData').userData;
@@ -23,7 +25,8 @@ const App = ({ Component, pageProps }) => {
         if (router.pathname !== "/login" && !userState ) {
             router.push("/login").then(() => setIsLoading(false));
         } else if (router.pathname !== "/home" && userState) {
-            router.push("/home").then(() => setIsLoading(false));
+            setLoggedUser(userState);
+            router.push(`/home`).then(() => setIsLoading(false));
         } else {
             setIsLoading(false);
         }
@@ -43,15 +46,18 @@ const App = ({ Component, pageProps }) => {
     }
 
     return (
-        <div>
+        <AppContext.Provider
+            value={{
+                loggedUser: loggedUser,
+                setLoggedUser: setLoggedUser,
+            }}
+        >
             <Head>
                 <title>Raven</title>
             </Head>
             {initialRender()}
-        </div>
+        </AppContext.Provider>
     )
-
-
 };
 
 export default App;

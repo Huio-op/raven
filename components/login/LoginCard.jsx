@@ -4,7 +4,7 @@ import buttonStyle from '../../styles/button/loginButtonStyles.module.css';
 import React from 'react';
 
 import { setCookie } from 'cookies-next';
-import MD5 from "crypto-js/md5";
+import MD5 from 'crypto-js/md5';
 
 import Button from '@mui/material/Button';
 import { Field, Form, Formik } from 'formik';
@@ -16,19 +16,17 @@ const LoginCard = ({ changeCardValue }) => {
   const router = useRouter();
 
   const doUserLogin = async (values) => {
-      values.password =  MD5(values.password).toString();
+    values.password = MD5(values.password).toString();
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values),
     });
 
-
-
     if (res.ok) {
-        console.log(res);
-        //bad idea tho i'm low on time ideally should have an hash being generate to validate user -> hash
-        setCookie('userData', values.email, {maxAge: 60 * 6 * 24 * 70});
+      console.log(res);
+      //bad idea tho i'm low on time ideally should have an hash being generate to validate user -> hash
+      setCookie('userData', values.email, { maxAge: 60 * 6 * 24 * 70 });
       router.push('/home');
     }
   };
@@ -59,7 +57,7 @@ const LoginCard = ({ changeCardValue }) => {
                 />
                 <Field
                   name="password"
-                  id='password'
+                  id="password"
                   as={TextField}
                   label="Senha"
                   type="password"

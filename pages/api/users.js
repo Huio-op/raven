@@ -1,5 +1,5 @@
 import prisma from '../../lib/prisma';
-import MD5 from "crypto-js/md5";
+import MD5 from 'crypto-js/md5';
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
@@ -7,7 +7,7 @@ const handler = async (req, res) => {
 
     const result = await prisma.user.findUnique({
       where: {
-        email
+        email,
       },
     });
     return res.status(200).json(result);
@@ -26,7 +26,7 @@ const handler = async (req, res) => {
       data: {
         email,
         password: md5Password,
-        userProfileId: userProfileResult.id
+        userProfileId: userProfileResult.id,
       },
     });
 

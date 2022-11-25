@@ -1,0 +1,58 @@
+.ProfileLeftPanel {
+  border: 1px solid var(--dark-border-color);
+  border-radius: 8px;
+  left: 0px;
+  position: fixed;
+  padding: 0 30px;
+  width: 20%;
+  background: var(--dark-background-color);
+  height: 100vh;
+  z-index: 200;
+  color: #fff;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nameInfo {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.userEmail {
+  font-weight: 100;
+}
+
+.userNameWrapper {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  width: 85%;
+}
+
+.aboutWrapper {
+  border: 1px solid var(--dark-border-color);
+  border-radius: 8px;
+  color: #fff;
+  margin-top: 20px;
+  padding: 25px;
+  width: 85%;
+}
+
+.ProfileLeftPanel h3 {
+  margin: 0 0 15px 0;
+}
+
+.locationWrapper {
+  border: 1px solid var(--dark-border-color);
+  border-radius: 8px;
+  color: #fff;
+  margin-top: 20px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 85%;
+}

@@ -14,10 +14,7 @@ const ProfileMiniatureAvatar = ({ userId, fullAvatar = null }) => {
   const fetchUserAvatar = async (userId) => {
     //TODO Implementar a busca por avatar quando for criado o cadastro
     if (!fullAvatar) {
-      //   const result = await fetch(`/api/user/avatar?userId=${userId}`, {
-      //     method: 'GET',
-      //     headers: { 'Content-Type': 'application/json' },
-      //   });
+      setAvatar(PLACEHOLDER.src);
     } else {
       setAvatar(fullAvatar);
     }
@@ -26,12 +23,7 @@ const ProfileMiniatureAvatar = ({ userId, fullAvatar = null }) => {
   return (
     <div className={styles.ProfileMiniatureAvatar}>
       <div className={styles.AvatarWrapper}>
-        {/* <Image
-          className={styles.AvatarImg}
-          src={avatar}
-          alt={'Avatar'}
-          layout={'fill'}
-        /> */}
+        <img className={styles.AvatarImg} src={avatar} />
       </div>
     </div>
   );

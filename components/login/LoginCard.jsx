@@ -24,7 +24,6 @@ const LoginCard = ({ changeCardValue }) => {
     });
 
     if (res.ok) {
-      console.log(res);
       //bad idea tho i'm low on time ideally should have an hash being generate to validate user -> hash
       setCookie('userData', values.email, { maxAge: 60 * 6 * 24 * 70 });
       router.push('/home');

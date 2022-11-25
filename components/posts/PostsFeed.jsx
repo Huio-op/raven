@@ -20,6 +20,7 @@ const POSTS = [
     user: {
       avatar: USER_AVATAR,
       name: 'Felips',
+      id: 1,
     },
     comments: ['', '', ''],
   },
@@ -29,6 +30,7 @@ const POSTS = [
     user: {
       avatar: USER_AVATAR,
       name: 'Felips',
+      id: 1,
     },
     comments: ['', '', ''],
   },
@@ -38,6 +40,7 @@ const POSTS = [
     user: {
       avatar: USER_AVATAR,
       name: 'Felips',
+      id: 1,
     },
     comments: ['', '', '', '', ''],
   },
@@ -47,6 +50,7 @@ const POSTS = [
     user: {
       avatar: USER_AVATAR,
       name: 'Felips',
+      id: 1,
     },
     comments: ['', '', '', '', '', '', '', '', ''],
   },
@@ -56,6 +60,7 @@ const POSTS = [
     user: {
       avatar: USER_AVATAR,
       name: 'Felips',
+      id: 1,
     },
     comments: ['', '', '', '', ''],
   },

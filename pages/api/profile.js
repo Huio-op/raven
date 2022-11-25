@@ -3,10 +3,14 @@ import MD5 from 'crypto-js/md5';
 
 const handler = async (req, res) => {
   if (req.method === 'GET') {
-    const { email } = req.query;
+    const { userId } = req.query;
     const user = await prisma.user.findUnique({
       where: {
-        email: decodeURIComponent(email),
+        id: parseInt(userId),
+      },
+      include: {
+        followerFrom: true,
+        followingWho: true,
       },
     });
 
@@ -18,6 +22,7 @@ const handler = async (req, res) => {
       },
     });
 
+    console.log('usese', user);
     if (user) {
       delete user.password;
       res.status(200).json({ user, profile });

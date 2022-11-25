@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import styles from './ProfileMiniatureAvatar.module.css';
-import Image from 'next/image';
+import Router from 'next/router';
 
 import PLACEHOLDER from '../../assets/img/default_avatar.png';
 
-const ProfileMiniatureAvatar = ({ userId, fullAvatar = null }) => {
+const ProfileMiniatureAvatar = ({
+  userId,
+  fullAvatar = null,
+  goToProfile = false,
+}) => {
   const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
@@ -20,8 +24,14 @@ const ProfileMiniatureAvatar = ({ userId, fullAvatar = null }) => {
     }
   };
 
+  const clickAvatar = async () => {
+    if (goToProfile) {
+      Router.push(`/profile/${userId}`);
+    }
+  };
+
   return (
-    <div className={styles.ProfileMiniatureAvatar}>
+    <div className={styles.ProfileMiniatureAvatar} onClick={clickAvatar}>
       <div className={styles.AvatarWrapper}>
         <img className={styles.AvatarImg} src={avatar} />
       </div>

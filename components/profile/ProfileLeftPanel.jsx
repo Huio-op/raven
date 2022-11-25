@@ -3,8 +3,10 @@ import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import ProfileMiniatureAvatar from './ProfileMiniatureAvatar';
 import AppContext from '../../AppContext';
+import Button from '@mui/material/Button';
+import buttonStyle from '../../styles/button/loginButtonStyles.module.css';
 
-const ProfileLeftPanel = () => {
+const ProfileLeftPanel = ({ userId }) => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
 
@@ -14,7 +16,10 @@ const ProfileLeftPanel = () => {
     const parts = location.href.split('/');
     const baseUrl = parts[0] + '//' + parts[2];
     const url = new URL(`${baseUrl}/api/profile`);
-    url.searchParams.append('email', userCtx.loggedUser);
+
+    // const { email, id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
+
+    url.searchParams.append('userId', userId);
 
     const result = await fetch(url, {
       method: 'GET',
@@ -34,7 +39,9 @@ const ProfileLeftPanel = () => {
   }, []);
 
   return (
-    <>
+    <div
+      className={`${styles.ProfileLeftPanelWrapper} ${buttonStyle.cardWrapper}`}
+    >
       <div className={styles.ProfileLeftPanel}>
         <div className={styles.userNameWrapper}>
           <ProfileMiniatureAvatar fullAvatar={userData?.profile.avatar} />
@@ -42,6 +49,14 @@ const ProfileLeftPanel = () => {
             <span className={styles.userName}>{userData?.profile.name}</span>
             <span className={styles.userEmail}>{userData?.user.email}</span>
           </div>
+        </div>
+        <div className={styles.userFollowInfo}>
+          <span>
+            Seguidores: <strong>{userData?.user.followerFrom.length}</strong>
+          </span>
+          <span>
+            Seguindo: <strong>{userData?.user.followingWho.length}</strong>
+          </span>
         </div>
         <div className={styles.aboutWrapper}>
           <h3>Sobre você:</h3>
@@ -59,7 +74,10 @@ const ProfileLeftPanel = () => {
           {userData?.birthDate || 'Não informado'}
         </div>
       </div>
-    </>
+      <Button variant="outlined" type="submit">
+        Editar Perfil
+      </Button>
+    </div>
   );
 };
 

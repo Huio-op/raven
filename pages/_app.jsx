@@ -28,6 +28,7 @@ const App = ({ Component, pageProps }) => {
         // router.push(`/home`).then(() => setIsLoading(false));
         setIsLoading(false);
       } else {
+        setLoggedUser(userState);
         setIsLoading(false);
       }
     } catch (e) {

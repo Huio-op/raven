@@ -1,12 +1,17 @@
+.ProfileLeftPanelWrapper {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0px;
+  width: 22%;
+}
+
 .ProfileLeftPanel {
   border: 1px solid var(--dark-border-color);
   border-radius: 8px;
-  left: 0px;
-  position: fixed;
   padding: 0 30px;
-  width: 20%;
   background: var(--dark-background-color);
-  height: 100vh;
+  height: 80vh;
   z-index: 200;
   color: #fff;
   align-items: center;
@@ -55,4 +60,15 @@
   flex-direction: column;
   gap: 5px;
   width: 85%;
+}
+
+.userFollowInfo {
+  display: inline-flex;
+  margin-top: 20px;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.editButton {
+  justify-self: end;
 }

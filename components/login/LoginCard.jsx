@@ -16,16 +16,19 @@ const LoginCard = ({ changeCardValue }) => {
   const router = useRouter();
 
   const doUserLogin = async (values) => {
-    values.password = MD5(values.password).toString();
+    const encodedPassword = MD5(values.password).toString();
     const res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
+      body: JSON.stringify({ email: values.email, password: encodedPassword }),
     });
+
+    const { user } = await res.json();
+    const encodedUser = JSON.stringify({ email: user.email, id: user.id });
 
     if (res.ok) {
       //bad idea tho i'm low on time ideally should have an hash being generate to validate user -> hash
-      setCookie('userData', values.email, { maxAge: 60 * 6 * 24 * 70 });
+      setCookie('userData', encodedUser, { maxAge: 60 * 6 * 24 * 70 });
       router.push('/home');
     }
   };

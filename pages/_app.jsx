@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }) => {
         router.push('/login').then(() => setIsLoading(false));
       } else if (router.pathname !== '/home' && userState) {
         setLoggedUser(userState);
-        // router.push(`/home`).then(() => setIsLoading(false));
+        router.push(`/home`).then(() => setIsLoading(false));
         setIsLoading(false);
       } else {
         setLoggedUser(userState);

@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import PostsFeed from '../../components/posts/PostsFeed';
+import CreatePost from '../../components/posts/CreatePost';
 import ProfileMiniatureAvatar from '../../components/profile/ProfileMiniatureAvatar';
 import IconButton from '../../components/buttons/IconButton';
 import { useContext, useEffect } from 'react';
@@ -13,9 +14,15 @@ const Home = ({ user }) => {
 
   const { email, id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+    }
+
   return (
     <>
       <div className={styles.HomePageWrapper}>
+          <CreatePost />
         <PostsFeed />
       </div>
       <div className={styles.ProfileMiniatureWrapper}>

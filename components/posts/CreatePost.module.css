@@ -1,0 +1,55 @@
+.createPostWrapper {
+    border: 1px solid var(--dark-border-color);
+    border-radius: 12px;
+    width: calc(45% - 20px);
+    height: 200px;
+    min-width: 630px;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.createPostInput {
+    background-color: inherit;
+    border-color: var(--dark-border-color);
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    width: 100%;
+    color: white;
+    padding: 20px;
+    height: 55%;
+    resize: none;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+}
+
+.createPostInput:focus {
+    outline: none
+}
+
+.submitButtonContainer {
+    height: 25%;
+    width: 105%;
+    display: flex;
+    align-items: center;
+}
+
+.submitButton {
+    margin-left: auto;
+    color: white;
+    height: 30px;
+    width: 160px;
+    background-image: linear-gradient( 83.2deg, rgba(150,93,233,1) 10.8%, rgba(99,88,238,1) 94.3% );
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    filter: hue-rotate(45deg);
+}
+
+.createPostForm {
+    width: calc(100% - 40px);
+    height: 100%;
+}

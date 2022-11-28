@@ -1,0 +1,45 @@
+.EditPageBody {
+    background-color: var(--dark-background-color);
+    border: var(--dark-border);
+    border-radius: 12px;
+    color: #fff;
+    font-family: var(--montserrat);
+    height: fit-content;
+    margin-top: 25px;
+    width: 45%;
+    min-width: 650px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EditPageBody :global(.MuiTextField-root),
+.EditPageBody :global(.MuiInputBase-root) {
+    width: 100%;
+    margin-bottom: 30px;
+    color: #fff !important;
+}
+
+.EditPageBody :global(.MuiFormLabel-root), .signUpFormWrapper :global(.MuiInputBase-input),
+.EditPageBody :global(.MuiInputBase-root), .EditPageBody :global(.MuiSvgIcon-root), .EditPageBody :global(.MuiOutlinedInput-notchedOutline span) {
+    color: #fff;
+}
+
+.EditPageBody :global(.MuiFormLabel-root.Mui-focused),
+.EditPageBody :global(.MuiInputBase-root) {
+    color: #ab98ec !important
+}
+
+.EditPageBody :global(.MuiOutlinedInput-notchedOutline),
+.EditPageBody :global(.MuiInputBase-root) {
+    border-color: #fff !important;
+}
+
+.EditPageBody :global(fieldset) {
+    border-color: #ab98ec !important;
+}
+
+.EditPageBody :global(.MuiInputBase-input) {
+    color: #fff !important;
+}

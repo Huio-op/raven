@@ -7,13 +7,10 @@ const Profile = ({}) => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log('COMOMOMOMOMO', id);
-
   return (
     <>
       <div className={styles.ProfilePostsWrapper}>
         {id && <ProfileLeftPanel userId={id} />}
-
         <PostsFeed />
       </div>
     </>

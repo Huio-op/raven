@@ -22,11 +22,19 @@ const handler = async (req, res) => {
       },
     });
 
-    console.log('usese', user);
     if (user) {
       delete user.password;
       res.status(200).json({ user, profile });
     }
+  } else if (req.method === 'POST') {
+
+    const {id, name, about, city, birthDate, gender} = req.body;
+
+    const profile = await prisma.userProfile.update({
+      where: {id: id},
+      data: { name, about, city, birthDate, gender }
+    })
+
   }
 
   res.end();

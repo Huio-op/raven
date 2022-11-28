@@ -5,6 +5,7 @@ import ProfileMiniatureAvatar from './ProfileMiniatureAvatar';
 import AppContext from '../../AppContext';
 import Button from '@mui/material/Button';
 import buttonStyle from '../../styles/button/loginButtonStyles.module.css';
+import Link from 'next/link';
 
 const ProfileLeftPanel = ({ userId }) => {
   const [loading, setLoading] = useState(false);
@@ -74,9 +75,11 @@ const ProfileLeftPanel = ({ userId }) => {
           {userData?.birthDate || 'Não informado'}
         </div>
       </div>
-      <Button variant="outlined" type="submit">
-        Editar Perfil
-      </Button>
+      <Link href={`/profile/${userId}/edit`}>
+        <Button variant="outlined" type="submit">
+          Editar Perfil
+        </Button>
+      </Link>
     </div>
   );
 };

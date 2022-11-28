@@ -9,7 +9,6 @@ import { getCookies } from 'cookies-next';
 
 const Home = ({ user }) => {
   const userCtx = useContext(AppContext);
-  console.log('isisisis', userCtx);
 
   const { email, id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
 

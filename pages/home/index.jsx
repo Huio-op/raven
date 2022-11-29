@@ -9,23 +9,49 @@ import prisma from '../../lib/prisma';
 import { getCookies } from 'cookies-next';
 
 const Home = ({ user }) => {
+
   const userCtx = useContext(AppContext);
 
-  const { email, id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
+  useEffect(() => {
+      (async function() {
+          const { id } = await JSON.parse(decodeURIComponent(userCtx.loggedUser));
+          await fetch(`/api/user/${id}`, {
+              method: 'GET'
+          })
+              .then(r => r.json())
+              .then (data => userCtx.setLoggedUser({
+                  id: data.id,
+                  email: data.email,
+                  userProfileId: data.userProfileId
+              }));
+      })()
+  }, [])
 
-    const handleSubmit = (event) => {
+    const handlePostSubmit = async (event) => {
         event.preventDefault();
-
-    }
+        if (event.target.textarea.value !== '') {
+            const result = await fetch('/api/posts/posts', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    text: event.target.textarea.value,
+                    published: true,
+                    attachments: [],
+                    userProfileId: userCtx.loggedUser.userProfileId,
+                })
+            });
+        }
+        event.target.textarea.value = '';
+  }
 
   return (
     <>
       <div className={styles.HomePageWrapper}>
-          <CreatePost />
+          <CreatePost handlePostSubmit={handlePostSubmit}/>
         <PostsFeed />
       </div>
       <div className={styles.ProfileMiniatureWrapper}>
-        <ProfileMiniatureAvatar userId={id} goToProfile={true} />
+        <ProfileMiniatureAvatar userId={userCtx.loggedUser.id} goToProfile={true} />
       </div>
       <div className={styles.CreatePostWrapper}>
         <IconButton icon={'history_edu'} />

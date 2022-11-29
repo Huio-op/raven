@@ -7,16 +7,17 @@ const handler = async (req, res) => {
       const posts = await prisma.post.findMany();
       return res.status(200).json({posts});
     } else if (req.method === 'POST') {
-        const { text, published, attachments, user } = req.body;
-        const postResult = prisma.post.create({
+        const { text, published, attachments, userProfileId } = req.body;
+        const postResult = await prisma.post.create({
             data: {
                 text,
                 published,
                 attachments,
-                userProfileId: user.profileId;
+                userProfileId
             }
         })
         res.json(postResult);
+
     }
     res.end();
   };

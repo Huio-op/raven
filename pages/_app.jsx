@@ -11,7 +11,7 @@ import '../styles/global.css';
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [loggedUser, setLoggedUser] = useState([]);
+  const [loggedUser, setLoggedUser] = useState({});
 
   const isUserLoggedIn = () => {
     return getCookies('userData').userData;

@@ -11,15 +11,15 @@ generator client {
 model Post {
   id            Int         @id @default(autoincrement())
   text          String
-  likes         BigInt      @default(0)
+  likes         Int      @default(0)
   published     Boolean     @default(false)
   attachments   String[]
   userProfile   UserProfile @relation(fields: [userProfileId], references: [id], name: "postOwnerProfile")
   userProfileId Int
 
   // comments
-  parentPost   Post   @relation(fields: [parentPostId], references: [id], name: "postComment")
-  parentPostId Int
+  parentPost   Post?   @relation(fields: [parentPostId], references: [id], name: "postComment")
+  parentPostId Int?
   comments     Post[] @relation(name: "postComment")
 
   // likedPosts

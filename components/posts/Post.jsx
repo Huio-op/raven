@@ -23,11 +23,10 @@ const Post = ({ postId, fullPost = null }) => {
     <div className={`${styles.PostWrapper} ${styles.borderBottom}`}>
       <div className={styles.PostHeader}>
         <ProfileMiniatureAvatar
-          userId={post?.user.id}
-          fullAvatar={post?.user.avatar}
+          userId={post?.userProfile.id}
           goToProfile={true}
         />
-        <span>{post?.user.name}</span>
+        <span>{post?.userProfile.name}</span>
       </div>
       <div className={`${styles.PostTextContent} ${styles.borderBottom}`}>
         <span>{post?.text}</span>
@@ -36,7 +35,7 @@ const Post = ({ postId, fullPost = null }) => {
         {/*//TODO criar componente para imagens*/}
       </div>
       <div className={`${styles.PostFooter}`}>
-        <IconButton icon={'chat_bubble'} counter={post?.comments.length} />
+        <IconButton icon={'chat_bubble'} counter={'0'} />
         <IconButton icon={'thumb_up'} counter={post?.likes} />
       </div>
     </div>

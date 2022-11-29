@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import {Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from '@mui/material';
-import {usePostApi} from "../../hooks/useApi";
 
 const SignupCard = ({changeCardValue}) => {
     const createUser = async (values) => {
@@ -15,13 +14,6 @@ const SignupCard = ({changeCardValue}) => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(values),
         });
-
-        const {resultAgain} = usePostApi('/api/users', {
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(values),
-        })
-
-        console.log(resultAgain)
 
         if (result.ok) {
             changeCardValue(2);

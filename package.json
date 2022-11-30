@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "next build && npx prisma dev && npx prisma generate",
+    "build": "next build && npx prisma migrate dev && npx prisma generate",
     "start": "next start"
   },
   "keywords": [],

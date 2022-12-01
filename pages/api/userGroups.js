@@ -15,7 +15,7 @@ const handler = async (req, res) => {
         res.status(200).json({ groups });
     } else if (req.method === 'POST') {
 
-        const {userId, name} = req.body;
+        const {userId, name, id} = req.body;
 
         const user = await prisma.user.findUnique({
             where: {
@@ -30,9 +30,23 @@ const handler = async (req, res) => {
         delete user.followerFrom;
         delete user.followingWho;
 
-        const group = await prisma.group.create({
-            data: { name, ownerId: user.id, members: {connect: [{id: user.id}]} }
-        })
+        let group;
+        if (id !== null) {
+
+            const dbGroup = await prisma.group.findUnique({
+                where: {id: id},
+                include: {members: true}
+            })
+
+            group = await prisma.group.update({
+                where: {id: id},
+                data: { name, ownerId: user.id, members: {connect: dbGroup.members} }
+            })
+        } else {
+            group = await prisma.group.create({
+                data: { name, ownerId: user.id, members: {connect: [{id: user.id}]} }
+            })
+        }
 
         res.status(200).json({ group });
     } else if (req.method === 'DELETE') {

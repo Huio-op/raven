@@ -1,0 +1,29 @@
+.NavBarCentered {
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 2px;
+    top: 0;
+    display: flex;
+}
+
+.NavBar {
+    border: 1px solid var(--dark-border-color);
+    width: 225px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.NavBar h3 {
+    color: #fff;
+    text-decoration: none;
+    padding: 0 30px;
+    text-align: end;
+}
+
+.NavBar h3:hover {
+    cursor: pointer;
+}

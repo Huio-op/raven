@@ -1,0 +1,9 @@
+.GroupListWrapper {
+    background: var(--dark-background-color);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}

@@ -7,6 +7,7 @@ import {useContext, useEffect, useState} from 'react';
 import AppContext from '../../AppContext';
 import prisma from '../../lib/prisma';
 import { getCookies } from 'cookies-next';
+import NavBar from "../../components/navigation/NavBar";
 
 const Home = ({ user }) => {
 
@@ -31,7 +32,6 @@ const Home = ({ user }) => {
         })
             .then(r => r.json())
             .then(data => {
-                console.log('data', data);
                 setPosts([...data]);
             });
     }
@@ -71,6 +71,9 @@ const Home = ({ user }) => {
       <div className={styles.ProfileMiniatureWrapper}>
         <ProfileMiniatureAvatar userId={userCtx.loggedUser.id} goToProfile={true} />
       </div>
+        <div className={styles.NavBarWrapper}>
+            <NavBar userId={userCtx.loggedUser.id}/>
+        </div>
       <div className={styles.CreatePostWrapper}>
         <IconButton icon={'history_edu'} />
       </div>

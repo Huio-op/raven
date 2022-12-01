@@ -25,6 +25,9 @@ model Post {
   // likedPosts
   likedPostsFrom UserProfile[] @relation(name: "likedPosts")
 
+  // Groups
+  groupId Int
+
   @@map(name: "post")
 }
 
@@ -40,6 +43,10 @@ model User {
   // followers and following
   followerFrom UserProfile[] @relation(name: "followers")
   followingWho UserProfile[] @relation(name: "following")
+
+  // Groups
+  ownedGroups Group[] @relation(name: "groupOwner")
+  memberGroups Group[] @relation(name: "groupMember")
 
   @@map(name: "users")
 }
@@ -63,4 +70,14 @@ model UserProfile {
   likedPosts Post[] @relation("likedPosts")
 
   @@map(name: "user_profile")
+}
+
+model Group {
+
+    id Int @id @default(autoincrement())
+    owner User @relation(fields: [ownerId], references: [id], name: "groupOwner")
+    ownerId Int
+    name String
+    members User[] @relation(name: "groupMember")
+
 }

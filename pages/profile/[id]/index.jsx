@@ -7,7 +7,7 @@ import NavBar from "../../../components/navigation/NavBar";
 const Profile = ({}) => {
   const router = useRouter();
   const { id } = router.query;
-
+    console.log('idfromquery', id, router)
   return (
     <>
       <div className={styles.ProfilePostsWrapper}>

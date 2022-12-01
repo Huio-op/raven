@@ -14,7 +14,7 @@ const Home = ({ user }) => {
   const userCtx = useContext(AppContext);
   const [posts, setPosts] = useState([]);
   const [userData, setUserData] = useState({});
-
+    console.log('jeisonono', userCtx.loggedUser)
     const { id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
 
     useEffect(() => {
@@ -69,10 +69,10 @@ const Home = ({ user }) => {
         <PostsFeed posts={[...posts]}/>
       </div>
       <div className={styles.ProfileMiniatureWrapper}>
-        <ProfileMiniatureAvatar userId={userCtx.loggedUser.id} goToProfile={true} />
+        <ProfileMiniatureAvatar userId={id} goToProfile={true} />
       </div>
         <div className={styles.NavBarWrapper}>
-            <NavBar userId={userCtx.loggedUser.id}/>
+            <NavBar userId={id}/>
         </div>
       <div className={styles.CreatePostWrapper}>
         <IconButton icon={'history_edu'} />

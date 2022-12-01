@@ -28,8 +28,9 @@ const ProfileLeftPanel = ({ userId }) => {
         'Content-Type': 'application/json',
       },
     });
-
     const fetchedUserData = await result.json();
+    console.log('rererere', fetchedUserData)
+
     fetchedUserData.profile = fetchedUserData.profile[0];
 
     setUserData(fetchedUserData);

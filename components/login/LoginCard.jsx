@@ -28,8 +28,8 @@ const LoginCard = ({ changeCardValue }) => {
 
     if (res.ok) {
       //bad idea tho i'm low on time ideally should have an hash being generate to validate user -> hash
-      setCookie('userData', encodedUser, { maxAge: 60 * 6 * 24 * 70 });
-      router.push('/home');
+      await setCookie('userData', encodedUser, { maxAge: 60 * 6 * 24 * 70 });
+      await window.location.reload();
     }
   };
 

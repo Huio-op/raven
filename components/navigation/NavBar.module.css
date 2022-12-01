@@ -1,6 +1,7 @@
 .NavBarCentered {
     height: 100vh;
     justify-content: center;
+    font-family: 'Roboto', sans-serif;
     align-items: center;
     position: fixed;
     right: 2px;
@@ -22,6 +23,7 @@
     text-decoration: none;
     padding: 0 30px;
     text-align: end;
+    font-size: 22px;
 }
 
 .NavBar h3:hover {

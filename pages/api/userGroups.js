@@ -31,7 +31,8 @@ const handler = async (req, res) => {
         delete user.followingWho;
 
         let group;
-        if (id !== null) {
+        console.log('usususus', id)
+        if (!!id) {
 
             const dbGroup = await prisma.group.findUnique({
                 where: {id: id},

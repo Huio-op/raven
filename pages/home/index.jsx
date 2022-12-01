@@ -3,7 +3,7 @@ import PostsFeed from '../../components/posts/PostsFeed';
 import CreatePost from '../../components/posts/CreatePost';
 import ProfileMiniatureAvatar from '../../components/profile/ProfileMiniatureAvatar';
 import IconButton from '../../components/buttons/IconButton';
-import { useContext, useEffect } from 'react';
+import {useContext, useEffect, useState} from 'react';
 import AppContext from '../../AppContext';
 import prisma from '../../lib/prisma';
 import { getCookies } from 'cookies-next';
@@ -11,21 +11,43 @@ import { getCookies } from 'cookies-next';
 const Home = ({ user }) => {
 
   const userCtx = useContext(AppContext);
+  const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-      (async function() {
-          const { id } = await JSON.parse(decodeURIComponent(userCtx.loggedUser));
-          await fetch(`/api/user/${id}`, {
-              method: 'GET'
-          })
-              .then(r => r.json())
-              .then (data => userCtx.setLoggedUser({
-                  id: data.id,
-                  email: data.email,
-                  userProfileId: data.userProfileId
-              }));
-      })()
-  }, [])
+    useEffect(() => {
+        fetchUserData();
+        fetchPosts();
+    }, [])
+
+    const fetchPosts = async () => {
+        await fetch('/api/posts/fetchMany', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                idList: [1]
+            })
+        })
+            .then(r => r.json())
+            .then(data => {
+                console.log('data', data);
+                setPosts([...data]);
+            });
+    }
+
+    const fetchUserData = async () => {
+        console.log(userCtx.loggedUser);
+        console.log(decodeURIComponent(userCtx.loggedUser));
+        console.log(JSON.parse(decodeURIComponent(userCtx.loggedUser)));
+        const { id } = await JSON.parse(decodeURIComponent(userCtx.loggedUser));
+        await fetch(`/api/user/${id}`, {
+            method: 'GET'
+        })
+            .then(r => r.json())
+            .then (data => userCtx.setLoggedUser({
+                id: data.id,
+                email: data.email,
+                userProfileId: data.userProfileId
+            }));
+    }
 
     const handlePostSubmit = async (event) => {
         event.preventDefault();
@@ -42,13 +64,15 @@ const Home = ({ user }) => {
             });
         }
         event.target.textarea.value = '';
+        await fetchPosts();
   }
 
   return (
     <>
+        {console.log('shoudlrender?', posts)}
       <div className={styles.HomePageWrapper}>
-          <CreatePost handlePostSubmit={handlePostSubmit}/>
-        <PostsFeed />
+        <CreatePost handlePostSubmit={handlePostSubmit}/>
+        <PostsFeed posts={[...posts]}/>
       </div>
       <div className={styles.ProfileMiniatureWrapper}>
         <ProfileMiniatureAvatar userId={userCtx.loggedUser.id} goToProfile={true} />

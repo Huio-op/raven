@@ -12,6 +12,9 @@ const Home = ({ user }) => {
 
   const userCtx = useContext(AppContext);
   const [posts, setPosts] = useState([]);
+  const [userData, setUserData] = useState({});
+
+    const { id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
 
     useEffect(() => {
         fetchUserData();
@@ -34,19 +37,11 @@ const Home = ({ user }) => {
     }
 
     const fetchUserData = async () => {
-        console.log(userCtx.loggedUser);
-        console.log(decodeURIComponent(userCtx.loggedUser));
-        console.log(JSON.parse(decodeURIComponent(userCtx.loggedUser)));
-        const { id } = await JSON.parse(decodeURIComponent(userCtx.loggedUser));
         await fetch(`/api/user/${id}`, {
             method: 'GET'
         })
             .then(r => r.json())
-            .then (data => userCtx.setLoggedUser({
-                id: data.id,
-                email: data.email,
-                userProfileId: data.userProfileId
-            }));
+            .then (data => setUserData(data));
     }
 
     const handlePostSubmit = async (event) => {
@@ -59,7 +54,7 @@ const Home = ({ user }) => {
                     text: event.target.textarea.value,
                     published: true,
                     attachments: [],
-                    userProfileId: userCtx.loggedUser.userProfileId,
+                    userProfileId: userData.userProfileId,
                 })
             });
         }
@@ -69,7 +64,6 @@ const Home = ({ user }) => {
 
   return (
     <>
-        {console.log('shoudlrender?', posts)}
       <div className={styles.HomePageWrapper}>
         <CreatePost handlePostSubmit={handlePostSubmit}/>
         <PostsFeed posts={[...posts]}/>

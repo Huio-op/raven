@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import {useRouter} from "next/router";
 import DeleteIcon from '@mui/icons-material/Delete';
 import sweetAlert from 'sweetalert'
-import {router} from "next/client";
 
 const GroupsList = ({userId}) => {
 

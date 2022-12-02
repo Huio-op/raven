@@ -51,6 +51,7 @@ const Home = ({}) => {
 
     const handlePostSubmit = async (event) => {
         event.preventDefault();
+        console.log('userData::', userData)
         if (event.target.textarea.value !== '') {
             const result = await fetch('/api/posts/posts', {
                 method: 'POST',

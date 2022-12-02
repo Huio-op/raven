@@ -6,6 +6,7 @@ import NavBar from "../../../components/navigation/NavBar";
 import {useContext, useEffect, useState} from "react";
 import AppContext from "../../../AppContext";
 import CreatePost from "../../../components/posts/CreatePost";
+import GroupLeftPanel from "../../../components/groups/GroupLeftPanel";
 
 const GroupPage = () => {
 
@@ -42,8 +43,6 @@ const GroupPage = () => {
                 method: 'GET'
             })).json();
 
-            console.log('   sadsadsa', userData)
-
             await fetch('/api/posts/posts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -63,6 +62,7 @@ const GroupPage = () => {
     return (
         <>
             <div className={styles.GroupPostsWrapper}>
+                <GroupLeftPanel groupId={groupId}/>
                 <CreatePost handlePostSubmit={handlePostSubmit} />
                 <PostsFeed posts={posts}/>
             </div>

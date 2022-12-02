@@ -24,7 +24,7 @@ const handler = async (req, res) => {
                     text,
                     published,
                     attachments,
-                    userProfile: {connect: {id: userProfileId}},
+                    userProfile: {connect: {id: parseInt(userProfileId)}},
                     groupId: !!groupId ? parseInt(groupId) : null,
                 }
             })

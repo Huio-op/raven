@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 const handler = async (req, res) => {
 
-    const {userId, groupId} = req.body;
+    const {userId, groupId, profile} = req.body;
 
     if (req.method === 'POST') {
 
@@ -23,9 +23,33 @@ const handler = async (req, res) => {
                 }
             })
         } else {
+
+            let ids = [];
+
+            if (!profile) {
+                const user = await prisma.user.findUnique({
+                    where: {
+                        id: parseInt(userId),
+                    },
+                    include: {
+                        followerFrom: true,
+                        followingWho: {
+                            include: {
+                                owner:true
+                            }
+                        },
+                    },
+                });
+
+
+                ids = user.followingWho.map(follow => follow.owner.id)
+            }
+
+            ids.push(parseInt(userId));
+
             posts = await prisma.post.findMany({
                 where: {
-                    userProfile: {owner: {id: parseInt(userId)}},
+                    userProfile: {owner: {id: {in: ids}}},
                 },
                 include: {
                     userProfile: true

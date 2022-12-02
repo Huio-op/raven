@@ -1,0 +1,40 @@
+.UserSearch {
+    border: 1px solid var(--dark-border-color);
+    border-radius: 12px;
+    width: calc(45% - 20px);
+    min-width: 630px;
+    margin-top: 50px;
+}
+
+.searchForm {
+    background-color: inherit;
+    width: 100%;
+    color: white;
+    padding: 0 20px;
+    height: 55%;
+    resize: none;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.searchForm :global(.MuiTextField-root) {
+    width: 85%;
+}
+
+.searchForm input {
+    background-color: inherit;
+    border: none;
+    width: 85%;
+    color: white;
+    resize: none;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 45px;
+}
+
+.searchForm input:hover,
+.searchForm input:focus-visible {
+    outline: none
+}

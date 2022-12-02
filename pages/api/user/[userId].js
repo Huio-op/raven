@@ -9,6 +9,9 @@ const handler = async (req, res) => {
             where: {
                 id: Number(userId),
             },
+            include: {
+                followingWho: true
+            }
         });
         return res.status(200).json(result);
     }

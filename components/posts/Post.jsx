@@ -46,6 +46,18 @@ const Post = ({ postId, fullPost = null, groupId = null, minimal = false }) => {
         }
     };
 
+    const handleLike = async (postId) => {
+        console.log('here');
+        await fetch(`/api/posts/likePost/${postId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        await fetchPost();
+    }
+
   return (
     <div className={`${styles.PostWrapper} ${styles.borderBottom}`}>
       <div className={styles.postHeaderWrapper}>
@@ -73,7 +85,7 @@ const Post = ({ postId, fullPost = null, groupId = null, minimal = false }) => {
                 <IconButton icon={'chat_bubble'} onClick={() => {
                     router.push(`/post/${post.id}`)
                 }}/>
-                <IconButton icon={'thumb_up'} counter={post?.likes} />
+                <IconButton icon={'thumb_up'} counter={post?.likes} onClick={() => handleLike(post.id)}/>
             </div>
         )}
     </div>

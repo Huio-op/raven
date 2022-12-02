@@ -1,0 +1,39 @@
+.UserFeedBody {
+    background-color: var(--dark-background-color);
+    border: var(--dark-border);
+    border-radius: 12px;
+    color: #fff;
+    font-family: var(--montserrat);
+    height: fit-content;
+    margin-top: 25px;
+    width: 45%;
+    min-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.userWrapper {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding: 10px 0;
+    border-bottom: var(--dark-border);
+}
+
+.userWrapper:last-child {
+    border-bottom: none;
+}
+
+.userWrapper button {
+    width: 100px !important;
+    margin-top: 0 !important;
+}
+
+.userInfo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}

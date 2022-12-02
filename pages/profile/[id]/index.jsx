@@ -16,17 +16,20 @@ const Profile = ({}) => {
     }, [])
 
     const fetchUserPosts = async () => {
-        await fetch('/api/posts/fetchMany', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                userId: id,
+        if (!!id) {
+            await fetch('/api/posts/fetchMany', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: id,
+                    profile: true,
+                })
             })
-        })
-            .then(r => r.json())
-            .then(data => {
-                setPosts(data);
-            });
+                .then(r => r.json())
+                .then(data => {
+                    setPosts(data);
+                });
+        }
     }
 
     return (

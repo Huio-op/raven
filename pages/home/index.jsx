@@ -8,6 +8,7 @@ import AppContext from '../../AppContext';
 import prisma from '../../lib/prisma';
 import {getCookies} from 'cookies-next';
 import NavBar from "../../components/navigation/NavBar";
+import UserSearch from "../../components/profile/UserSearch";
 
 const Home = ({}) => {
 
@@ -69,6 +70,7 @@ const Home = ({}) => {
     return (
         <>
             <div className={styles.HomePageWrapper}>
+                <UserSearch />
                 <CreatePost handlePostSubmit={handlePostSubmit}/>
                 <PostsFeed posts={posts}/>
             </div>

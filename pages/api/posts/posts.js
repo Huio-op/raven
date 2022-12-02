@@ -13,7 +13,7 @@ const handler = async (req, res) => {
                 text,
                 published,
                 attachments,
-                userProfileId
+                userProfile: {connect: {id: userProfileId}}
             }
         })
         res.json(postResult);

@@ -31,7 +31,7 @@ const Home = ({}) => {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                idList: [1]
+                userId: id
             })
         })
             .then(r => r.json())

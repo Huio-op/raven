@@ -26,7 +26,7 @@ model Post {
   likedPostsFrom UserProfile[] @relation(name: "likedPosts")
 
   // Groups
-  groupId Int
+  groupId Int?
 
   @@map(name: "post")
 }

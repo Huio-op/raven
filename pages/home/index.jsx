@@ -63,7 +63,7 @@ const Home = ({}) => {
             });
         }
         event.target.textarea.value = '';
-        await fetchPosts();
+        await fetchPosts(userData.id);
     }
 
     return (

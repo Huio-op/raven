@@ -12,21 +12,20 @@ const handler = async (req, res) => {
         if (!!groupId) {
             posts = await prisma.post.findMany({
                 where: {
-                    userProfile: {owner: {id: userId}},
+                    userProfile: {owner: {id: parseInt(userId)}},
                     groupId: parseInt(groupId)
                 },
                 include: {
-                    userProfile: true
+                    userProfile: true,
                 },
                 orderBy: {
                     id: 'desc'
                 }
             })
-            console.log('popopop', posts, groupId)
         } else {
             posts = await prisma.post.findMany({
                 where: {
-                    userProfile: {owner: {id: userId}},
+                    userProfile: {owner: {id: parseInt(userId)}},
                 },
                 include: {
                     userProfile: true

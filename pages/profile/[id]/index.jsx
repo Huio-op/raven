@@ -3,15 +3,37 @@ import PostsFeed from '../../../components/posts/PostsFeed';
 import ProfileLeftPanel from '../../../components/profile/ProfileLeftPanel';
 import { useRouter } from 'next/router';
 import NavBar from "../../../components/navigation/NavBar";
+import {useEffect, useState} from "react";
 
 const Profile = ({}) => {
   const router = useRouter();
   const { id } = router.query;
-  return (
+
+    const [posts, setPosts] = useState();
+
+    useEffect(() => {
+        fetchUserPosts()
+    }, [])
+
+    const fetchUserPosts = async () => {
+        await fetch('/api/posts/fetchMany', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                userId: id,
+            })
+        })
+            .then(r => r.json())
+            .then(data => {
+                setPosts(data);
+            });
+    }
+
+    return (
     <>
       <div className={styles.ProfilePostsWrapper}>
         {id && <ProfileLeftPanel userId={id} />}
-        <PostsFeed />
+        <PostsFeed posts={posts}/>
       </div>
         <div className={styles.NavBarWrapper}>
             <NavBar userId={id}/>

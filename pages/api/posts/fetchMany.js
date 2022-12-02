@@ -4,22 +4,22 @@ const prisma = new PrismaClient();
 
 const handler = async (req, res) => {
 
-    const {idList} = req.body;
+    const {userId} = req.body;
 
     if (req.method === 'POST') {
+        console.log('vevnevneve', userId)
         const posts = await prisma.post.findMany({
             where: {
-                userProfileId: {in: idList},
+                userProfile: {owner: {id: userId}},
             },
             include: {
-                userProfile: {
-
-                }
+                userProfile: true
             },
             orderBy: {
               id: 'desc'
             }
         })
+        console.log('popopopopop', posts)
         res.json(posts);
     }
 

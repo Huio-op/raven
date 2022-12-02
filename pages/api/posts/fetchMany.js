@@ -4,22 +4,37 @@ const prisma = new PrismaClient();
 
 const handler = async (req, res) => {
 
-    const {userId} = req.body;
+    const {userId, groupId} = req.body;
 
     if (req.method === 'POST') {
-        console.log('vevnevneve', userId)
-        const posts = await prisma.post.findMany({
-            where: {
-                userProfile: {owner: {id: userId}},
-            },
-            include: {
-                userProfile: true
-            },
-            orderBy: {
-              id: 'desc'
-            }
-        })
-        console.log('popopopopop', posts)
+
+        let posts;
+        if (!!groupId) {
+            posts = await prisma.post.findMany({
+                where: {
+                    userProfile: {owner: {id: userId}},
+                    groupId: {groupId}
+                },
+                include: {
+                    userProfile: true
+                },
+                orderBy: {
+                    id: 'desc'
+                }
+            })
+        } else {
+            posts = await prisma.post.findMany({
+                where: {
+                    userProfile: {owner: {id: userId}},
+                },
+                include: {
+                    userProfile: true
+                },
+                orderBy: {
+                    id: 'desc'
+                }
+            })
+        }
         res.json(posts);
     }
 

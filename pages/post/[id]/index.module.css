@@ -1,0 +1,29 @@
+.postPageWrapper {
+    background: var(--dark-background-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.postContainer {
+    border: var(--dark-border);
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+    color: #fff;
+    font-family: var(--montserrat);
+    height: fit-content;
+    margin-top: 25px;
+    width: 30vw;
+    min-width: 650px;
+}
+
+.postsWrapper {
+    width: 30vw;
+}
+
+.backIcon {
+    position: absolute;
+}

@@ -37,7 +37,7 @@ const Home = ({}) => {
         })
             .then(r => r.json())
             .then(data => {
-                setPosts(data);
+                setPosts(data.filter(post => post.parentPostId === null));
             });
     }
 
@@ -79,9 +79,6 @@ const Home = ({}) => {
             </div>
             <div className={styles.NavBarWrapper}>
                 <NavBar userId={userData?.id}/>
-            </div>
-            <div className={styles.CreatePostWrapper}>
-                <IconButton icon={'history_edu'}/>
             </div>
         </>
     );

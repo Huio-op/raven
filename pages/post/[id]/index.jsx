@@ -81,7 +81,7 @@ const PostPage = () => {
                     <CreatePost handlePostSubmit={handlePostSubmit} placeholder={'Adicione algo a discussão!'}/>
                     <div className={`${style.postContainer}`}>
                         {childPosts.map((post, idx) => {
-                            return <Post groupId={post.groupId} fullPost={post} key={`${post.id}`} minimal={true}}/>
+                            return <Post groupId={post.groupId} fullPost={post} key={`${post.id}`} minimal={true}/>
                         })}
                     </div>
                 </div>

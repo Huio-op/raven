@@ -9,7 +9,7 @@ const PostsFeed = ({posts = []}) => {
     <div className={styles.PostsFeedBody}>
       {posts && (
           posts.map((post, idx) => {
-            return <Post fullPost={post} key={idx} />;
+            return <Post fullPost={post} key={`${idx}-${post.id}`} />;
           })
       )}
     </div>

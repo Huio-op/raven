@@ -36,7 +36,7 @@ const Home = ({}) => {
         })
             .then(r => r.json())
             .then(data => {
-                setPosts([...data]);
+                setPosts(data);
             });
     }
 
@@ -70,7 +70,7 @@ const Home = ({}) => {
         <>
             <div className={styles.HomePageWrapper}>
                 <CreatePost handlePostSubmit={handlePostSubmit}/>
-                <PostsFeed posts={[...posts]}/>
+                <PostsFeed posts={posts}/>
             </div>
             <div className={styles.ProfileMiniatureWrapper}>
                 <ProfileMiniatureAvatar userId={userData?.id} goToProfile={true}/>

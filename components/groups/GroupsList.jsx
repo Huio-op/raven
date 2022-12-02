@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import {useRouter} from "next/router";
 import DeleteIcon from '@mui/icons-material/Delete';
 import sweetAlert from 'sweetalert'
+import {router} from "next/client";
 
 const GroupsList = ({userId}) => {
 
@@ -74,7 +75,7 @@ const GroupsList = ({userId}) => {
                 {groups.length !== 0 &&
                     groups.map(group => {
                         return (
-                            <GroupItem group={group} fetchUserGroups={fetchUserGroups} editGroup={editGroup} />
+                            <GroupItem group={group} fetchUserGroups={fetchUserGroups} editGroup={editGroup} router={router} />
                             )
                     })
                 }
@@ -111,7 +112,7 @@ const CreateGroupSchema = Yup.object().shape({
     name: Yup.string().required('É necessário fornecer um nome').default(''),
 });
 
-const GroupItem = ({group, fetchUserGroups, editGroup}) => {
+const GroupItem = ({group, fetchUserGroups, editGroup, router}) => {
 
     const deleteGroup = async () => {
         try {
@@ -146,7 +147,7 @@ const GroupItem = ({group, fetchUserGroups, editGroup}) => {
               <span>{group.name}</span>
               <span>Membros: {group.members.length}</span>
               <div>
-                  <IconButton><Icon>east</Icon></IconButton>
+                  <IconButton onClick={() => router.push(`/groups/${group.id}`)}><Icon>east</Icon></IconButton>
                   <IconButton onClick={() => editGroup(group)}><Icon>edit</Icon></IconButton>
                   <IconButton onClick={deleteGroup}><DeleteIcon /></IconButton>
               </div>

@@ -1,0 +1,9 @@
+.GroupPostsWrapper {
+    background: var(--dark-background-color);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+}

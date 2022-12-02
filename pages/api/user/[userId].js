@@ -10,7 +10,8 @@ const handler = async (req, res) => {
                 id: Number(userId),
             },
             include: {
-                followingWho: true
+                followingWho: true,
+                userProfile: true
             }
         });
         return res.status(200).json(result);

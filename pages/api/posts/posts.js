@@ -8,13 +8,14 @@ const handler = async (req, res) => {
       return res.status(200).json({posts});
     } else if (req.method === 'POST') {
         const { text, published, attachments, userProfileId, groupId = null } = req.body;
+        console.log('asdasdasdsada', groupId, userProfileId)
         const postResult = await prisma.post.create({
             data: {
                 text,
                 published,
                 attachments,
                 userProfile: {connect: {id: userProfileId}},
-                groupId: groupId
+                groupId: !!groupId ? parseInt(groupId) : null
             }
         })
         res.json(postResult);

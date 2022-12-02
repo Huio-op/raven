@@ -1,5 +1,5 @@
 import {useRouter} from "next/router";
-import styles from "../../profile/[id]/index.module.css";
+import styles from "./index.module.css";
 import ProfileLeftPanel from "../../../components/profile/ProfileLeftPanel";
 import PostsFeed from "../../../components/posts/PostsFeed";
 import NavBar from "../../../components/navigation/NavBar";
@@ -37,6 +37,13 @@ const GroupPage = () => {
     const handlePostSubmit = async (event) => {
         event.preventDefault();
         if (event.target.textarea.value !== '') {
+
+            const userData = await (await fetch(`/api/user/${id}`, {
+                method: 'GET'
+            })).json();
+
+            console.log('   sadsadsa', userData)
+
             await fetch('/api/posts/posts', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -50,13 +57,12 @@ const GroupPage = () => {
             });
         }
         event.target.textarea.value = '';
-        await fetchPosts();
+        await fetchGroupPosts();
     }
 
     return (
         <>
-            <div className={styles.ProfilePostsWrapper}>
-                {groupId && <ProfileLeftPanel userId={id}/>}
+            <div className={styles.GroupPostsWrapper}>
                 <CreatePost handlePostSubmit={handlePostSubmit} />
                 <PostsFeed posts={posts}/>
             </div>

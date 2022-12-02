@@ -55,7 +55,6 @@ const GroupsList = ({userId}) => {
     }
 
     const editGroup = async (group) => {
-        console.log('grugru', group)
         setInitialValues(group);
         setDialogOpen(true);
     }
@@ -84,7 +83,6 @@ const GroupsList = ({userId}) => {
                 <DialogTitle>Criar grupo</DialogTitle>
                 <Formik initialValues={initialValues} onSubmit={createGroup}>
                     {({values, handleChange, handleBlur, errors, touched}) => {
-                        console.log('vavavava', values, initialValues)
                         return (
                             <Form className={`${styles.groupForm} ${buttonStyle.cardWrapper}`}>
                                 <Field

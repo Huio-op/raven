@@ -6,23 +6,27 @@ import IconButton from '../../components/buttons/IconButton';
 import {useContext, useEffect, useState} from 'react';
 import AppContext from '../../AppContext';
 import prisma from '../../lib/prisma';
-import { getCookies } from 'cookies-next';
+import {getCookies} from 'cookies-next';
 import NavBar from "../../components/navigation/NavBar";
 
-const Home = ({ user }) => {
+const Home = ({}) => {
 
-  const userCtx = useContext(AppContext);
-  const [posts, setPosts] = useState([]);
-  const [userData, setUserData] = useState({});
-    console.log('jeisonono', userCtx.loggedUser)
-    const { id } = JSON.parse(decodeURIComponent(userCtx.loggedUser));
+    const userCtx = useContext(AppContext);
+    const [posts, setPosts] = useState([]);
+    const [userData, setUserData] = useState({});
 
     useEffect(() => {
-        fetchUserData();
-        fetchPosts();
+        if (typeof userCtx.loggedUser === "string") {
+            const {id} = JSON.parse(decodeURIComponent(userCtx.loggedUser));
+            fetchUserData(id);
+            fetchPosts(id);
+        } else {
+            window.location.reload();
+        }
+
     }, [])
 
-    const fetchPosts = async () => {
+    const fetchPosts = async (id) => {
         await fetch('/api/posts/fetchMany', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -36,12 +40,12 @@ const Home = ({ user }) => {
             });
     }
 
-    const fetchUserData = async () => {
+    const fetchUserData = async (id) => {
         await fetch(`/api/user/${id}`, {
             method: 'GET'
         })
             .then(r => r.json())
-            .then (data => setUserData(data));
+            .then(data => setUserData(data));
     }
 
     const handlePostSubmit = async (event) => {
@@ -60,45 +64,45 @@ const Home = ({ user }) => {
         }
         event.target.textarea.value = '';
         await fetchPosts();
-  }
+    }
 
-  return (
-    <>
-      <div className={styles.HomePageWrapper}>
-        <CreatePost handlePostSubmit={handlePostSubmit}/>
-        <PostsFeed posts={[...posts]}/>
-      </div>
-      <div className={styles.ProfileMiniatureWrapper}>
-        <ProfileMiniatureAvatar userId={id} goToProfile={true} />
-      </div>
-        <div className={styles.NavBarWrapper}>
-            <NavBar userId={id}/>
-        </div>
-      <div className={styles.CreatePostWrapper}>
-        <IconButton icon={'history_edu'} />
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className={styles.HomePageWrapper}>
+                <CreatePost handlePostSubmit={handlePostSubmit}/>
+                <PostsFeed posts={[...posts]}/>
+            </div>
+            <div className={styles.ProfileMiniatureWrapper}>
+                <ProfileMiniatureAvatar userId={userData?.id} goToProfile={true}/>
+            </div>
+            <div className={styles.NavBarWrapper}>
+                <NavBar userId={userData?.id}/>
+            </div>
+            <div className={styles.CreatePostWrapper}>
+                <IconButton icon={'history_edu'}/>
+            </div>
+        </>
+    );
 };
 
-export async function getServerSideProps({ req, res }) {
-  const userData = getCookies({ req, res }).userData;
+export async function getServerSideProps({req, res}) {
+    const userData = getCookies({req, res}).userData;
 
-  let user = {};
-  if (userData) {
-    user = await prisma.user.findUnique({
-      where: {
-        email: userData,
-      },
-    });
-  }
-  delete user?.password;
+    let user = {};
+    if (userData) {
+        user = await prisma.user.findUnique({
+            where: {
+                email: userData,
+            },
+        });
+    }
+    delete user?.password;
 
-  const procUser = JSON.stringify(user);
+    const procUser = JSON.stringify(user);
 
-  return {
-    props: { user: procUser },
-  };
+    return {
+        props: {user: procUser},
+    };
 }
 
 export default Home;

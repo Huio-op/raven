@@ -68,11 +68,11 @@ const ProfileLeftPanel = ({ userId }) => {
         </div>
         <div className={styles.locationWrapper}>
           <h3>Localização:</h3>
-          {userData?.city || 'Não informado'}
+          {userData?.profile.city || 'Não informado'}
         </div>
         <div className={styles.locationWrapper}>
           <h3>Nascido em:</h3>
-          {userData?.birthDate || 'Não informado'}
+          {userData?.profile.birthDate || 'Não informado'}
         </div>
       </div>
       <Link href={`/profile/${userId}/edit`}>

@@ -4,7 +4,6 @@ const handler = async (req, res) => {
     const { id } = req.query;
 
     if (req.method === 'GET') {
-        console.log('gothere')
         const likes = await prisma.post.update({
             where: {
                 id: parseInt(id)

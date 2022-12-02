@@ -6,7 +6,6 @@ const handler = async (req, res) => {
       return res.status(200).json({posts});
     } else if (req.method === 'POST') {
         const { text, published, attachments, userProfileId, groupId = null, parentPostId = null } = req.body;
-        console.log("ũserpropopopop", userProfileId)
         let postResult = {};
         if (parentPostId) {
             postResult = await prisma.post.create({

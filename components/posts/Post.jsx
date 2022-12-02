@@ -47,7 +47,6 @@ const Post = ({ postId, fullPost = null, groupId = null, minimal = false }) => {
     };
 
     const handleLike = async (postId) => {
-        console.log('here');
         await fetch(`/api/posts/likePost/${postId}`, {
             method: 'GET',
             headers: {

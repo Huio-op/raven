@@ -29,7 +29,6 @@ const ProfileLeftPanel = ({ userId }) => {
       },
     });
     const fetchedUserData = await result.json();
-    console.log('rererere', fetchedUserData)
 
     fetchedUserData.profile = fetchedUserData.profile[0];
 

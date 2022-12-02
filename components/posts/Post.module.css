@@ -1,7 +1,9 @@
 .PostWrapper {
+    width: 96%;
+    height: fit-content;
     color: var(--white);
     font-family: var(--montserrat);
-    padding: var(--lr-15px);
+    padding: 13px;
     box-shadow: 0 2px 0 -1px var(--dark-border-color);;
 }
 
@@ -37,7 +39,7 @@
     display: inline-flex;
     justify-content: space-around;
     padding: var(--tb-10px);
-    width: 100%;
+    width: 95%;
 }
 
 .borderBottom {

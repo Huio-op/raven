@@ -3,11 +3,14 @@ import ProfileMiniatureAvatar from '../profile/ProfileMiniatureAvatar';
 import { useEffect, useState } from 'react';
 import IconButton from '../buttons/IconButton';
 import groupId from "../../pages/groups/[groupId]";
+import {useRouter} from 'next/router'
 
-const Post = ({ postId, fullPost = null, groupId = null }) => {
+const Post = ({ postId, fullPost = null, groupId = null, minimal = false }) => {
     const [post, setPost] = useState(null);
 
     const [groupData, setGroupData] = useState(null);
+
+    const router = useRouter();
 
     const fetchGroupInfo = async () => {
         if (groupId) {
@@ -48,10 +51,10 @@ const Post = ({ postId, fullPost = null, groupId = null }) => {
       <div className={styles.postHeaderWrapper}>
           <div className={styles.PostHeader}>
               <ProfileMiniatureAvatar
-                  userId={post?.userProfile.id}
+                  userId={post?.userProfile?.id}
                   goToProfile={true}
               />
-              <span>{post?.userProfile.name}</span>
+              <span>{post?.userProfile?.name}</span>
           </div>
           <div className={styles.groupInfo}>
               {groupData &&
@@ -59,16 +62,20 @@ const Post = ({ postId, fullPost = null, groupId = null }) => {
               }
           </div>
       </div>
-      <div className={`${styles.PostTextContent} ${styles.borderBottom}`}>
+      <div className={`${styles.PostTextContent} ${styles.borderBottom}`} style={{border: minimal ? 'none' : ''}}>
         <span>{post?.text}</span>
       </div>
       <div className={styles.PostMediaContent}>
         {/*//TODO criar componente para imagens*/}
       </div>
-      <div className={`${styles.PostFooter}`}>
-        <IconButton icon={'chat_bubble'} counter={'0'} />
-        <IconButton icon={'thumb_up'} counter={post?.likes} />
-      </div>
+        {!minimal && (
+            <div className={`${styles.PostFooter}`}>
+                <IconButton icon={'chat_bubble'} onClick={() => {
+                    router.push(`/post/${post.id}`)
+                }}/>
+                <IconButton icon={'thumb_up'} counter={post?.likes} />
+            </div>
+        )}
     </div>
   );
 };

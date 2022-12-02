@@ -1,10 +1,8 @@
 .IconButton {
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
-    display: flex;
-}
-
-.IconWithCounter {
     flex-direction: column;
     gap: 5px;
+
 }

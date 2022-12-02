@@ -2,7 +2,7 @@ import styles from './Post.module.css';
 import ProfileMiniatureAvatar from '../profile/ProfileMiniatureAvatar';
 import { useEffect, useState } from 'react';
 import IconButton from '../buttons/IconButton';
-import groupId from "../../pages/group/[groupId]";
+import groupId from "../../pages/groups/[groupId]";
 
 const Post = ({ postId, fullPost = null, groupId = null }) => {
     const [post, setPost] = useState(null);

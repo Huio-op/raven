@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import {useRouter} from "next/router";
 import DeleteIcon from '@mui/icons-material/Delete';
 import sweetAlert from 'sweetalert'
+import {router} from "next/client";
 
 const GroupsList = ({userId}) => {
 
@@ -146,7 +147,7 @@ const GroupItem = ({group, fetchUserGroups, editGroup, router}) => {
               <span>{group.name}</span>
               <span>Membros: {group.members.length}</span>
               <div>
-                  <IconButton onClick={() => router.push(`/group/${group.id}`)}><Icon>east</Icon></IconButton>
+                  <IconButton onClick={() => router.push(`/groups/${group.id}`)}><Icon>east</Icon></IconButton>
                   <IconButton onClick={() => editGroup(group)}><Icon>edit</Icon></IconButton>
                   <IconButton onClick={deleteGroup}><DeleteIcon /></IconButton>
               </div>

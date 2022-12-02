@@ -60,7 +60,7 @@ const Home = ({}) => {
                     text: event.target.textarea.value,
                     published: true,
                     attachments: [],
-                    userProfileId: userData.userProfileId,
+                    userProfileId: userData.userProfile.id,
                 })
             });
         }
